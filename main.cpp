@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stdio.h>
-/*mallocº¯ÊıÍ·ÎÄ¼ş*/
+/*mallocå‡½æ•°å¤´æ–‡ä»¶*/
 #include "stdlib.h"
 #include "Stack.h"
 
@@ -9,80 +9,33 @@ using namespace std;
 int main()
 {
     Stack s;
-    printf("ÊäÈëÒ»¸öÊ®½øÖÆÊı£º");
+    printf("è¾“å…¥ä¸€ä¸ªåè¿›åˆ¶æ•°ï¼š");
     void conversion(Stack &s);
     conversion(s);
     return 0;
 }
 
-// ¹¹ÔìÒ»¸ö¿ÕÕ»
-void InitStack(Stack &s)
-{
-    s.elem = (int *)malloc(initsize * sizeof(int)); // ³õÊ¼·ÖÅäµØÖ·
-    s.base = 0; // baseÖ¸ÕëÖ¸ÏòÕ»µ×
-    s.top = 0;// ³õÊ¼»¯topÖ¸ÕëÖ¸ÏòÕ»¶¥ÔªËØµÄÏÂÒ»¸öÎ»ÖÃ
-    s.stacksize = 10;
-}
 
 
-// ²åÈënÎªĞÂµÄÕ»¶¥ÔªËØ
-void push(Stack &s, int n)
-{
-    if(s.top - s.base <= initsize) // ²»Âú
-    {
-        /*·½À¨ºÅÄÚÊÇs.top²»ÊÇtop*/
-        s.elem[s.top] = n; // ²åÈën
-        s.top += 1 ; // topÖ¸Õë+1
-    }
-    else
-    {
-        s.elem = (int *)realloc(s.elem, (initsize + increasesize) * sizeof(int)); // Õ»Âú£¬×·¼Ó¿Õ¼ä
-        s.stacksize += increasesize; // ĞŞ¸ÄinitsizeµÄÖµ
-    }
-
-
-}
-
-// ¿ÕµÄÊ±ºò·µ»Ø1£¬·Ç¿Õ·µ»Ø0
-bool StackEmpty(Stack &s)
-{
-    if(s.top == s.base) return true; // ¿Õ
-    else return false;
-}
-
-// Êä³öÕ»¶¥ÔªËØ·µ»Ø¸øe
-void pop(Stack &s, int &e)
-{
-    if(!StackEmpty(s)) // ·Ç¿Õ
-    {
-         s.top --; // ¶¨Î»µ½Õ»¶¥ÔªËØ
-         e = s.elem[s.top]; // È¡³öÕ»¶¥ÔªËØ·µ»Ø¸øe
-    }
-    else
-        /*Êä³ö×Ö·û´®Óï¾ä*/
-        printf("error");
-}
-
-
-// ¶ÔÓÚÊäÈëÒ»¸öÈÎÒâµÄ·Ç¸ºÊ®½øÖÆÕûÊı£¬´òÓ¡Êä³öÓëÆäµÈÖµµÄ°Ë½øÖÆÊı
+// å¯¹äºè¾“å…¥ä¸€ä¸ªä»»æ„çš„éè´Ÿåè¿›åˆ¶æ•´æ•°ï¼Œæ‰“å°è¾“å‡ºä¸å…¶ç­‰å€¼çš„å…«è¿›åˆ¶æ•°
 void conversion(Stack &s)
 {
-    InitStack(s); // ¹¹Ôì¿ÕÕ»
-    int n; // ½Úµã
-    /*scanfº¯Êı¶Ôn¸³ÖµnÒªÓÃÒıÓÃĞÎÊ½*/
-    scanf("%d",&n); // ÊäÈëÊ®½øÖÆÕûÊı
+    InitStack(s); // æ„é€ ç©ºæ ˆ
+    int n; // èŠ‚ç‚¹
+    /*scanfå‡½æ•°å¯¹nèµ‹å€¼nè¦ç”¨å¼•ç”¨å½¢å¼*/
+    scanf("%d",&n); // è¾“å…¥åè¿›åˆ¶æ•´æ•°
 
-    while(n) // ÕûÊı²»Îª0
+    while(n) // æ•´æ•°ä¸ä¸º0
     {
-        push(s, n % 8); // ÊäÈëÓàÊı½øÕ»
+        push(s, n % 8); // è¾“å…¥ä½™æ•°è¿›æ ˆ
         n = n / 8;
     }
 
-    printf("¶ÔÓ¦µÄ°Ë½øÖÆÊı£º");
+    printf("å¯¹åº”çš„å…«è¿›åˆ¶æ•°ï¼š");
     while(!StackEmpty(s))
     {
         int e;
-        pop(s,e); // °´Î»Êä³öÕ»ÄÚÔªËØ¸³Öµ¸øe
-        printf("%d", e); // Êä³ö
+        pop(s,e); // æŒ‰ä½è¾“å‡ºæ ˆå†…å…ƒç´ èµ‹å€¼ç»™e
+        printf("%d", e); // è¾“å‡º
     }
 }
