@@ -1,2 +1,1 @@
-# conversion
-Convert decimal to octal
+# Convert decimal to octal
